@@ -1,8 +1,5 @@
-import os
 from pathlib import Path
-
-dirName = input("Select Folder to sort: ")
-os.chdir(dirName)
+from loggenerator import *
 
 Directory= {
 "TextFiles" : [".doc", ".docx", ".log", ".msg", ".odt", ".pages", ".rtf", ".tex", ".txt", ".wpd", ".wps"],
@@ -25,7 +22,13 @@ FILE_FORMATS = {file_format: directory
                 for directory, file_formats in Directory.items()
                 for file_format in file_formats}
 
-def organize_junk():
+def filesort(currentDir):
+    os.chdir(currentDir)
+    try:
+        os.mkdir(currentDir + "\Log", 0o755)
+    except:
+        pass
+
     for entry in os.scandir():
         if entry.is_dir():
             continue
@@ -35,6 +38,7 @@ def organize_junk():
             directory_path = Path(FILE_FORMATS[file_format])
             directory_path.mkdir(exist_ok=True)
             file_path.rename(directory_path.joinpath(file_path))
+            addtoLog(currentDir,str(currentDir) +"\\" + str(file_path) + " moved to " + str(currentDir) + "\\" + str(directory_path.joinpath(file_path)))
 
         for dir in os.scandir():
             try:
@@ -42,8 +46,10 @@ def organize_junk():
             except:
                 pass
 
-organize_junk()
-
+    f = open("Log\log.txt", "a")
+    f.write("\n######## OPERATION COMPLETE ########\n")
+    f.write("\n")
+    f.close()
 
 
 

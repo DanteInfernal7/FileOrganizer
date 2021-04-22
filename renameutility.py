@@ -1,8 +1,8 @@
-import pathlib as path
-import os
+import os, glob
 
-dirName = input("Select Folder to sort: ")
-os.chdir(dirName)
+getDir = input("Select Folder: ")
+os.chdir(getDir)
+
 class renameUtil():
     def __init__(self,current,changed):
         self.current = current
@@ -10,16 +10,31 @@ class renameUtil():
 
     def renameSingle(self):
         for file in os.scandir():
-            if file.is_dir():
+            if file.is_dir() or file == "<DirEntry 'log.txt'>":
                 continue
+            else:
+                os.rename(self.current,self.changed)
+                break
+
     def renameBulk(self):
+        allfiles = glob.glob('*')
+        num = 1
         for file in os.scandir():
-            if file.is_dir():
+            if file.is_dir() or file == "<DirEntry 'log.txt'>":
                 continue
-    def rename(self):
-        for file in os.scandir():
-            if file.is_dir():
+            try:
+                for select in allfiles:
+                    if select in self.current:
+                            ext = os.path.splitext(select)
+                            os.rename(select, self.changed + str(num) + ext[1])
+                            num = num + 1
+            except:
                 continue
 
+obj1 = renameUtil("test.txt","test1.txt")
+obj1.renameSingle()
+arr = ["1.txt","2.txt","3.txt","4.txt","5.txt","6.txt"]
+obj2 = renameUtil(arr,"success")
+obj2.renameBulk()
 
 
