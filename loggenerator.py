@@ -1,6 +1,8 @@
 import os
 from datetime import datetime
 
+
+
 def addtoLog(currentDir,log):
     if os.getcwd() != currentDir:
         os.chdir(currentDir)
