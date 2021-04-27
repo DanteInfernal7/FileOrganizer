@@ -47,7 +47,7 @@ def filesort(currentDir):
                 pass
 
     f = open("Log\log.txt", "a")
-    f.write("\n######## OPERATION COMPLETE ########\n")
+    f.write("\n####### OPERATION COMPLETE #######\n")
     f.write("\n")
     f.close()
 

@@ -17,10 +17,10 @@ class renameUtil():
             else:
                 ext = os.path.splitext(self.current[0])
                 os.rename(self.current[0],self.changed+ext[1])
-                addtoLog(currentDir,self.current[0],self.changed+ext[1])
+                addtoLog(currentDir,self.current[0]+" renamed to "+self.changed+ext[1])
                 os.chdir(currentDir)
                 f = open("Log\log.txt", "a")
-                f.write("\n######## OPERATION COMPLETE ########\n")
+                f.write("\n####### OPERATION COMPLETE #######\n")
                 f.write("\n")
                 f.close()
                 break
@@ -49,6 +49,6 @@ class renameUtil():
 
         os.chdir(currentDir)
         f = open("Log\log.txt", "a")
-        f.write("\n######## OPERATION COMPLETE ########\n")
+        f.write("\n####### OPERATION COMPLETE #######\n")
         f.write("\n")
         f.close()
