@@ -21,7 +21,7 @@ Directory= {
 FILE_FORMATS = {file_format: directory
                 for directory, file_formats in Directory.items()
                 for file_format in file_formats}
-
+currentDir = ("C:\\Users\\hwala\Downloads\\testing")
 def filesort(currentDir):
     os.chdir(currentDir)
     try:

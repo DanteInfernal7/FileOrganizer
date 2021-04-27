@@ -1,8 +1,5 @@
 import os, glob
 
-getDir = input("Select Folder: ")
-os.chdir(getDir)
-
 class renameUtil():
     def __init__(self,current,changed):
         self.current = current
@@ -13,7 +10,8 @@ class renameUtil():
             if file.is_dir() or file == "<DirEntry 'log.txt'>":
                 continue
             else:
-                os.rename(self.current,self.changed)
+                ext = os.path.splitext(self.current[0])
+                os.rename(self.current[0],self.changed+ext[1])
                 break
 
     def renameBulk(self):
@@ -31,10 +29,5 @@ class renameUtil():
             except:
                 continue
 
-obj1 = renameUtil("test.txt","test1.txt")
-obj1.renameSingle()
-arr = ["1.txt","2.txt","3.txt","4.txt","5.txt","6.txt"]
-obj2 = renameUtil(arr,"success")
-obj2.renameBulk()
 
 
